@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 public class InputController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public UnityEvent<Vector2> OnMove = new UnityEvent<Vector2>();
-
+    public UnityEvent OnJump = new UnityEvent();
     void Start()
     {
         
@@ -31,6 +32,10 @@ public class InputController : MonoBehaviour
         {
             inputVector += UnityEngine.Vector2.right;
         }
+
         OnMove?.Invoke(inputVector);
+        if (Input.GetKeyDown(KeyCode.Space)){
+            OnJump?.Invoke();
+        }
     }
 }
